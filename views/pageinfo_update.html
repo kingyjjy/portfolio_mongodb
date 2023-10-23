@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Single+Day&family=Sunflower:wght@300;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container pagecontainer mt-5">
+        <h1 class="text-center">페이지 정보</h1>
+        <div class="d-flex justify-content-end my-2">
+            <a href="/pageinfo/list" class="btn btn-primary">페이지 목 록</a>
+        </div>
+        <form action="/pageinfo/edit" name="form" id="form" method="post" enctype="multipart/form-data">
+            <!-- loop -->
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="d-block my-2 mx-1">
+                                페이지 제목
+                            </label>
+                            <select name="pagename" id="selectbox" class="form-control" >
+                                <option value="" >선택하시오.</option>
+                                <option value="meta" {{select.sa}}>SEO 설정</option>
+                                <option value="introdata" {{select.sb}}>MAIN 설정</option>
+                                <option value="portfoliodata" {{select.sc}}>PORTFOLIO 설정</option>
+                                <option value="aboutdata" {{select.sd}}>ABOUT 설정</option>
+                                <option value="service" {{select.se}}>SERVICE 설정
+                                </option>
+                            </select>
+                            <!-- <select name="pagename" id="pagename" class="form-control">
+                                <option value="" >선택하시오.</option>
+                                <option value="meta">SEO 설정</option>
+                                <option value="introdata">MAIN 설정</option>
+                                <option value="portfoliodata">PORTFOLIO 설정</option>
+                                <option value="aboutdata">ABOUT 설정</option>
+                                <option value="service" >SERVICE 설정
+                                </option>
+                            </select> -->
+                        </div>
+                        <div class="col-6">
+                            <label class="d-block my-2 mx-1">
+                                페이지 타이틀
+                            </label>
+                            <input type="text" name="title" id="title" class="form-control" value="{{rs.title}}">
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <label class="d-block mx-1 my-2">
+                                페이지 내용
+                            </label>
+                            <textarea name="content" id="content" class="form-control" rows="5"  >{{rs.content}}</textarea>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <label class="d-block mx-1 my-2">
+                            배열 텍스트
+                        </label>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary me-3" id="addInput">폼 추 가</button>
+                            <button type="button" class="btn btn-danger" id="delInput">폼 제 거</button>
+                        </div>
+                        <div class="col-12 animateds mt-3" id="animated">
+                            {%for row in rs.animated%}
+                            <input type="text" name="animated" value="{{row}}" class="form-control animated mb-3">
+                            {%endfor%}
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <label class="d-block mx-1 my-2">
+                            이미지 업로드
+                        </label>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary me-3" id="addFile">폼 추 가</button>
+                            <button type="button" class="btn btn-danger" id="delFile">폼 제 거</button>
+                        </div>
+                        <div class="col-12 img mt-3" id="img">
+                            {%for row in rs.orimg%}
+                            <div class="row">
+                                
+                                <div class="col-2">
+                                    <label>
+                                        <input type="checkbox" name="imgchk" value="1" class="imgchk" >
+                                        이미지 업데이트
+                                    </label>
+                                </div>
+                                <div class="col-3" id="imgtxt_{{loop.index}}">{{row}}</div>
+                                <div class="col-7">
+                                    <input type="file" name="img" value="{{row}}" class="form-control input_img mb-3">
+                                </div>
+                            </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="btn-box d-flex justify-content-center my-5">
+                <button type="reset" class="btn btn-warning mx-4 px-5" > 취 소 </button>
+                <button type="submit" class="btn btn-success mx-4 px-5" > 전 송 </button>
+            </div>
+            <input type="hidden" name="id" value="{{rs.id}}">
+        </form>
+    </div>
+
+
+    <script>
+        //selectbox
+        /*function selectCotrol(str){
+            const el = document.getElementById('pagename');
+            const maxOpt = el.options.length;
+            for(let i=0; i<maxOpt; i++){
+                if(el.options[i].value ==str){
+                    el.options[i].selected = true;
+                }
+            }
+        }
+        selectCotrol('{{rs.pagename}}');*/
+    
+        // 체크박스와 텍스트, input의 요소를 가져옴
+        const checkboxs = document.querySelectorAll('.imgchk');
+        const imgInputs = document.querySelectorAll('.input_img');
+
+        // checkboxs 에 이벤트 리스너를 만든다, 여러개 있을 수 있기 때문(배열)에 배열을 이용(forEach)
+        checkboxs.forEach((checkbox,index)=>{
+            var imgText = document.getElementById('imgtxt_'+(index+1));
+            var myText = imgText.textContent;
+            checkbox.addEventListener("click",()=>{
+                if(checkbox.checked){
+                    imgText.textContent = "(삭제)"+myText;
+                    imgInputs[index].style.display="block";
+                }else{
+                    imgText.textContent = myText;
+                    imgInputs[index].style.display="none";
+                }
+            })
+        })
+
+        const addForm =(n)=>{
+            if(n==1){
+                const inputList = document.getElementById('animated');
+                const newInput = document.createElement('input');
+                newInput.type='text';
+                newInput.name='animated';
+                newInput.classList.add('animated');
+                newInput.classList.add('form-control');
+                newInput.classList.add('mb-3')
+                inputList.appendChild(newInput);
+            }else{
+                const fileList = document.getElementById('img');
+                const newFile = document.createElement('input');
+                newFile.type='file';
+                newFile.name='img';
+                newFile.classList.add('img');
+                newFile.classList.add('form-control');
+                newFile.classList.add('mb-3')
+                fileList.appendChild(newFile);
+            }
+        }
+        const delForm =(n)=>{
+            if(n==1){  
+                const delInputs = document.getElementsByClassName('animated');
+                const maxInput = delInputs.length;
+                if(maxInput>1){
+                    const lastInput = delInputs[maxInput-1];
+                    lastInput.parentNode.removeChild(lastInput);
+                }else{
+                    alert('더이상 삭제할 수 없습니다.');
+                }
+            }else{
+                const delFiles = document.getElementsByClassName('img');
+                const maxFile = delFiles.length;
+                if(maxFile>1){
+                    const lastFile = delFiles[maxFile-1];
+                    lastFile.parentNode.removeChild(lastFile);
+                }else{
+                    alert('더이상 삭제할 수 없습니다.');
+                }
+            }
+        }
+        document.getElementById('addInput').addEventListener('click',()=>{
+            addForm(1);
+        });
+        document.getElementById('delInput').addEventListener('click',()=>{
+            delForm(1);
+        });
+        document.getElementById('addFile').addEventListener('click',()=>{
+            addForm(2);
+        });
+        document.getElementById('delFile').addEventListener('click',()=>{
+            delForm(2);
+        });
+
+
+    </script>
+</body>
+</html>

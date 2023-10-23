@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 정보</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Single+Day&family=Sunflower:wght@300;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="pageinfo">
+    <div class="container">
+        <h1 class="my-5 py-4 text-center">{{title}}</h1>
+        <div class="d-flex justify-content-end my-3">
+            <a href="./list" class="btn btn-primary">나의 타임라인</a>
+        </div>
+        <div class="row">
+            <form action="/timeline/write" method="post" name="form" enctype="multipart/form-data">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label class="d-block mx-1 my-2 form-label">
+                                    잡타이틀
+                                </label>
+                                <input type="text" name="jobtitle" id="jobtitle" class="form-control"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label class="d-block mx-1 my-2 form-label">
+                                    장소
+                                </label>
+                                <input type="text" name="where" id="where" class="form-control"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-12 mt-2 text-center">
+                                <label class="d-block mx-1 my-2 form-label text-start">
+                                    날짜
+                                </label>
+                                <input type="text" name="wdate" id="datePicker" class="form-control" value="연도-월-일"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <label class="d-block mx-1 my-2">
+                               이미지 업로드
+                            </label>
+                            <!-- <div class="col-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-danger" id="delFile">폼 제 거</button>
+                            </div> -->
+                            <div class="col-12 img mt-3" id="img">
+                                <input type="file" name="img" class="form-control img mb-3">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="btn-box d-flex justify-content-center my-5">
+                    <button type="reset" class="btn btn-warning mx-4 px-5" > 취 소 </button>
+                    <button type="submit" class="btn btn-success mx-4 px-5" > 전 송 </button>
+                </div>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(function(){
+            $('#datePicker').datepicker({
+                format:'yyyy-mm-dd',
+                autoclose:true,
+                language:'ko'
+            });
+        })
+    </script>
+</body>
+</html>

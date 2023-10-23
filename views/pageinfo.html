@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 정보</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Single+Day&family=Sunflower:wght@300;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pageinfo">
+    <div class="container">
+        <h1 class="my-5 py-4 text-center">페이지 설정</h1>
+        <div class="d-flex justify-content-between my-5">
+            <a href="/" class="btn btn-primary">목 록</a>
+            <a href="./write" class="btn btn-secondary">데이터 입력</a>
+        </div>
+        <div class="row">
+            <!-- loop -->
+            {% for rs in row %}
+            <a href="./edit/{{rs.id}}" class="col-4 my-4">
+                <div class="card">
+                    {% for image in rs.img %}
+                        <img src="/pageinfo/{{image}}" class="card-img-top">
+                    {% endfor %}
+                    
+                    <div class="card-body">
+                        <h3>{{rs.pagename}}</h3>
+                        <h1>{{rs.title}}</h1>
+                        <p>{{rs.content}}</p>
+                        {% for ani in rs.animated %}
+                            <p>{{ani}}</p>
+                        {%endfor%}
+                    </div>
+                </div>
+            </a>
+            {%endfor%}
+            <!-- loop -->
+        </div>
+    </div>
+
+    
+    <script>
+        // function pageinfo(){
+        //     const form = document.form;
+        //     if(form.name.value == ''){
+        //         alert('이름은 필수 사항입니다.');
+        //         form.name.focus();
+        //         return false;
+        //     }
+        //     if(form.email.value == ''){
+        //         alert('이메일은 필수 사항입니다.');
+        //         form.email.focus();
+        //         return false;
+        //     }
+        //     if(form.phone.value == ''){
+        //         alert('전화번호는 필수 사항입니다.');
+        //         form.phone.focus();
+        //         return false;
+        //     }
+        //     if(form.id.value == ''){
+        //         form.action = '/myinfo/write';
+        //     }else{
+        //         form.action = '/myinfo/update';
+        //     }
+        //     return;
+        // }
+        
+
+        var box;
+        var inputtext = "";
+        var inputfile = "";
+        function addInput(n){
+            if(n ==1){
+                box = document.getElementById("addlisttext");
+                inputtext += "<input type ='text' name='animated'>";
+                inputtext += "<button type = 'button' class='btn btn-danger'>삭제</button><br/>";
+                box.innerHTML = inputtext;
+            }else{
+                box = document.getElementById("addlistfile");
+                inputfile += "<input type ='file' name='img'>";
+                inputfile += "<button type = 'button' class='btn btn-danger'>삭제</button><br/>";
+                box.innerHTML = inputfile;
+            }
+            
+        }
+    </script>
+</body>
+</html>

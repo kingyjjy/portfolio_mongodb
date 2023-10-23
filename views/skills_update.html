@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 정보</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Pixelify+Sans:wght@400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Single+Day&family=Sunflower:wght@300;500;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="pageinfo">
+    <div class="container">
+        <h1 class="my-5 py-4 text-center">{{title}}</h1>
+        <div class="d-flex justify-content-end my-2">
+            <a href="/skills/list" class="btn btn-primary">스 킬 목 록</a>
+        </div>
+        <div class="row">
+            <form action="/skills/edit/{{rs.id}}" method="post" name="skillsform" enctype="multipart/form-data">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label class="d-block mx-1 my-2 form-label">
+                                    스킬 이름
+                                </label>
+                                <input type="text" name="name" id="name" class="form-control" value="{{rs.name}}"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <label class="d-block mx-1 my-2 form-label">
+                                    스킬 퍼센트
+                                </label>
+                                <div class="d-flex rangebar-ruler">
+                                    <div class="position-relative"><span>10%</span></div>
+                                    <div class="position-relative"><span>20%</span></div>
+                                    <div class="position-relative"><span>30%</span></div>
+                                    <div class="position-relative"><span>40%</span></div>
+                                    <div class="position-relative"><span>50%</span></div>
+                                    <div class="position-relative"><span>60%</span></div>
+                                    <div class="position-relative"><span>70%</span></div>
+                                    <div class="position-relative"><span>80%</span></div>
+                                    <div class="position-relative"><span>90%</span></div>
+                                    <div class="position-relative"><span>100%</span></div>
+                                </div>
+                                
+                                <input type="range" class="form-range" id="form-range" name="value" step="5" value="{{rs.value}}"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <label class="d-block mx-1 my-2">
+                               이미지 업로드
+                            </label>
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                    <label><input type="checkbox" name="imgchk" value="1" class="imgchk"></label>
+                                </div>
+                                <div class="col-3 imgtxt">
+                                    {{rs.orimg}}
+                                </div>
+                                <div class="col-8 img " id="myfiles">
+                                    <input type="file" name="img" class="input_img form-control img">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="btn-box d-flex justify-content-center my-5">
+                    <button type="reset" class="btn btn-warning mx-4 px-5" > 취 소 </button>
+                    <button type="submit" class="btn btn-success mx-4 px-5" > 전 송 </button>
+                </div>
+                <input type="hidden" name="imgname" value="{{rs.img}}">
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    
+    <script>
+        const checkbox = document.querySelector('.imgchk');
+        const imgInput = document.querySelector('.input_img');
+        const imgtxt = document.querySelector('.imgtxt');
+        const imgtxtValue = imgtxt.textContent;
+        console.log(imgtxtValue);
+
+        checkbox.addEventListener('click',()=>{
+            if(checkbox.checked){
+                imgtxt.textContent = '(삭제)' + imgtxtValue;
+                imgInput.style.display = 'block';
+            }else{
+                imgtxt.textContent = imgtxtValue;
+                imgInput.style.display = 'none';
+            }
+        })
+    </script>
+</body>
+</html>
